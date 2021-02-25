@@ -6,6 +6,48 @@ public_folder: /images
 publish_mode: editorial_workflow
 
 collections:
+  - name: "portfolio-items"
+    label: "Portfolio Items"
+    folder: "src/pages/portfolio-items"
+    extension: "mdx"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{title}}"
+    fields:
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Media"
+        name: "media"
+        widget: "file"
+        media_library:
+          config:
+            multiple: false
+      - label: Tags
+        label_singular: "Tag"
+        name: "tags"
+        widget: list
+        summary: "{{fields.tag}}"
+        field:
+          label: Tag
+          name: tag
+          widget: relation
+          collection: "meta"
+          file: "tags"
+          searchFields:
+            - "tags.*.name"
+          displayFields:
+            - "tags.*.name"
+          valueField: "tags.*.slug"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+    
   - name: "config"
     label: "Config"
     delete: false
@@ -38,8 +80,8 @@ collections:
           - label: "Twitter account"
             name: "twitter_account"
             widget: "string"
-          - label: "GitHub account"
-            name: "github_account"
+          - label: "Facebook account"
+            name: "facebook_account"
             widget: "string"
 
   - name: "meta"
